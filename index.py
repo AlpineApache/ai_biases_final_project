@@ -1,5 +1,6 @@
 import pandas as pd
 from vader_sentiment import get_vader_sentiment_score
+from text_blob import get_text_blob_score
 
 # get the data
 sentences = pd.read_csv('./static-files/equity-evaluation-corpus.csv', delimiter=',')
@@ -9,7 +10,7 @@ df = pd.DataFrame(sentences, columns=['Sentence', 'Gender', 'Race', 'Emotion', '
 
 # apply data to each library
 all_results = []
-all_libraries = [get_vader_sentiment_score]
+all_libraries = [get_vader_sentiment_score, get_text_blob_score]
 
 for library in all_libraries:
 	temp = df.apply(library, axis=1)
