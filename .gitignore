@@ -1,0 +1,4 @@
+**.idea/**
+virtual_env/
+__pycache__/
+git
