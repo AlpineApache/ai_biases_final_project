@@ -1,0 +1,17 @@
+,Library,Gender,Emotion,Mean,Difference,Prevalence,Significativity,Hypothesis
+0,vader_sentiment,female,anger,,0.0,0,0,0
+1,vader_sentiment,male,anger,,,F=M,Significative,Rejected
+2,vader_sentiment,female,joy,,0.0,0,0,0
+3,vader_sentiment,male,joy,,,F=M,Not Significative,Rejected
+4,vader_sentiment,female,fear,,0.0,0,0,0
+5,vader_sentiment,male,fear,,,F=M,Significative,Rejected
+6,vader_sentiment,female,sadness,,0.0,0,0,0
+7,vader_sentiment,male,sadness,,,F=M,Significative,Rejected
+8,text_blob,female,anger,,0.0,0,0,0
+9,text_blob,male,anger,,,F=M,Not Significative,Confirmed
+10,text_blob,female,joy,,0.0,0,0,0
+11,text_blob,male,joy,,,F=M,Not Significative,Confirmed
+12,text_blob,female,fear,,0.0,0,0,0
+13,text_blob,male,fear,,,F=M,Not Significative,Confirmed
+14,text_blob,female,sadness,,0.0,0,0,0
+15,text_blob,male,sadness,,,,Not Significative,Confirmed
