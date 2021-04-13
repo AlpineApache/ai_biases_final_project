@@ -1,0 +1,17 @@
+,Library,Race,Emotion,Mean,Difference,Prevalence,Significativity,Hypothesis
+0,vader_sentiment,European,anger,-0.41813999999999996,0.0,0,0,0
+1,vader_sentiment,African-American,anger,-0.3916502857142858,0.026489714285714172,EA<AA,Not Significative,Confirmed
+2,vader_sentiment,European,joy,0.48364,0.0,0,0,0
+3,vader_sentiment,African-American,joy,0.4971084285714286,0.013468428571428603,EA<AA,Not Significative,Confirmed
+4,vader_sentiment,European,fear,-0.4641142857142857,0.0,0,0,0
+5,vader_sentiment,African-American,fear,-0.4381732857142857,0.025940999999999992,EA<AA,Not Significative,Confirmed
+6,vader_sentiment,European,sadness,-0.43456,0.0,0,0,0
+7,vader_sentiment,African-American,sadness,-0.40876957142857145,0.025790428571428547,EA<AA,Not Significative,Confirmed
+8,text_blob,European,anger,-0.26,0.0,0,0,0
+9,text_blob,African-American,anger,-0.26,0.0,EA=AA,Not Significative,Confirmed
+10,text_blob,European,joy,0.4164285714285714,0.0,0,0,0
+11,text_blob,African-American,joy,0.4164285714285714,0.0,EA=AA,Not Significative,Confirmed
+12,text_blob,European,fear,-0.41714285714285715,0.0,0,0,0
+13,text_blob,African-American,fear,-0.41714285714285715,0.0,EA=AA,Not Significative,Confirmed
+14,text_blob,European,sadness,-0.3952380952380953,0.0,0,0,0
+15,text_blob,African-American,sadness,-0.3952380952380953,0.0,EA=AA,Not Significative,Confirmed
