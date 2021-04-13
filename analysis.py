@@ -1,8 +1,6 @@
 import pandas as pd
 from scipy.stats import ttest_ind
 
-race_result_list = []
-race_mean_differences = []
 libraries = ["vader_sentiment", "text_blob"]
 emotions = ["anger", "joy", "fear", "sadness"]
 genders = ["female", "male"]
@@ -50,6 +48,9 @@ def run_t_test(category_1, category_2):
 
 
 def aggregate_racial_bias_results(data):
+	race_result_list = []
+	race_mean_differences = []
+
 	#####
 	# Calculate mean along the following parameters: library x emotion x race
 	for library in libraries:
@@ -87,7 +88,7 @@ def aggregate_racial_bias_results(data):
 	racial_bias_results = racial_bias_results.assign(Difference=difference)
 
 	#####
-	# Label difference between Male/female means
+	# Label difference between European American and African American
 	prevalence = []
 	for n in racial_bias_results.Difference:
 		if not len(prevalence) % 2 == 0:
@@ -105,7 +106,7 @@ def aggregate_racial_bias_results(data):
 	racial_bias_results = racial_bias_results.assign(Prevalence=prevalence)
 
 	#####
-	# Run t-test on race bias results
+	# Run t-test on racial bias results
 	significance = []
 	hypothesis = []
 	for library in libraries:
@@ -129,5 +130,91 @@ def aggregate_racial_bias_results(data):
 	racial_bias_results.to_csv("racial_bias_results.csv")
 
 
+def aggregate_gender_bias_results(data):
+	gender_result_list = []
+	gender_mean_differences = []
+
+	#####
+	# Calculate mean along the following parameters: library x emotion x gender
+	for library in libraries:
+		for emotion in emotions:
+			for gender in genders:
+				gender_df = data.loc[
+					(data["Library"] == library) & (data["Race"] == gender) & (data["Emotion"] == emotion)]
+				temp_data = {
+					"Library": library,
+					"Gender": gender,
+					"Emotion": emotion,
+					"Mean": gender_df["Compound"].mean()
+				}
+				gender_result_list.append(temp_data)
+
+	gender_bias_results = pd.DataFrame(gender_result_list)
+
+	#####
+	# Calculate differences between Male and Female mean
+	for i in gender_bias_results.Mean:
+		if len(gender_mean_differences) % 2 == 0:
+			gender_mean_differences.append(i)
+		else:
+			gender_mean_differences.append(i - (gender_mean_differences[-1]))
+
+	difference = []
+	for i in gender_mean_differences:
+		if len(difference) % 2 == 0:
+			# differences=[]
+			difference.append(0)
+		else:
+			difference.append(i)
+
+	difference = pd.Series(difference)
+	gender_bias_results = gender_bias_results.assign(Difference=difference)
+
+	#####
+	# Label difference between Male/female means
+	prevalence = []
+	for n in gender_bias_results.Difference:
+		if not len(prevalence) % 2 == 0:
+			if n == 0:
+				prevalence.append("F=M")
+			else:
+				if n > 0:
+					prevalence.append("F<M")
+				if n < 0:
+					prevalence.append("F>M")
+		else:
+			prevalence.append(0)
+
+	prevalence = pd.Series(prevalence)
+	gender_bias_results = gender_bias_results.assign(Prevalence=prevalence)
+
+	#####
+	# Run t-test on gender bias results
+	significance = []
+	hypothesis = []
+	for library in libraries:
+		for emotion in emotions:
+			male_var = data.loc[
+				(data["Library"] == library) & (data["Gender"] == "male") & (data["Emotion"] == emotion)]
+			female_var = data.loc[
+				(data["Library"] == library) & (data["Gender"] == "female") & (data["Emotion"] == emotion)]
+			category_1 = male_var["Compound"]
+			category_2 = female_var["Compound"]
+			temp = run_t_test(category_1, category_2)
+			significance.extend(temp[0])
+			hypothesis.extend(temp[1])
+
+	temp_significance = pd.Series(significance)
+	gender_bias_results = gender_bias_results.assign(Significativity=temp_significance)
+
+	temp_hypothesis = pd.Series(hypothesis)
+	gender_bias_results = gender_bias_results.assign(Hypothesis=temp_hypothesis)
+
+	#####
+	# Export race bias results to .csv file
+	gender_bias_results.to_csv("gender_bias_results.csv")
+
+
 def t_test_bias_analysis(data):
 	aggregate_racial_bias_results(data)
+	aggregate_gender_bias_results(data)
