@@ -111,7 +111,7 @@ def aggregate_racial_bias_results(data):
 	for library in libraries:
 		for emotion in emotions:
 			african_var = data.loc[(data["Library"] == library) & (data["Race"] == "African-American") & (data["Emotion"] == emotion)]
-			european_var = data.loc[(data["Library"] == library) & (data["Race"] == "European-American") & (data["Emotion"] == emotion)]
+			european_var = data.loc[(data["Library"] == library) & (data["Race"] == "European") & (data["Emotion"] == emotion)]
 			category_1 = african_var["Compound"]
 			category_2 = european_var["Compound"]
 			temp = run_t_test(category_1, category_2)
