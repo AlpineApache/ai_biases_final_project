@@ -4,7 +4,7 @@ from text_blob_library import get_text_blob_score
 from analysis import t_test_bias_analysis
 
 # get the data
-sentences = pd.read_csv("./static-files/equity-evaluation-corpus.csv", delimiter=",")
+sentences = pd.read_csv("./equity_evaluation_corpus.csv", delimiter=",")
 df = pd.DataFrame(sentences,
 				  columns=["Sentence", "Gender", "Race", "Emotion", "ID", "Library", "Negative", "Positive", "Neutral",
 						   "Compound"])
