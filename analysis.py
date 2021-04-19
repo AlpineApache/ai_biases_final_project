@@ -239,6 +239,8 @@ def plot_mean_differences():
 	dataplot = pd.concat(frames)
 	df = pd.DataFrame(dataplot)
 	sns.catplot(x="Library", y="Difference", data=df, jitter=0.12, hue="Type")
+	x = plt.gca()
+	x.set_xlabel("Library",labelpad=0.0)
 
 	#####
 	# Export the plot to .png file
