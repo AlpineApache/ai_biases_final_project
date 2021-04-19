@@ -1,8 +1,8 @@
-# Decoding Biases in Artificial Intelligence: Testing Python Sentiment Analysis Libraries for Racial and Gender Bias
+# Decoding Biases in Artificial Intelligence: Testing Python Sentiment Analysis Libraries for Racial and Gender Biases
 by Nicolaus CHRISTENSON, Matteo NEBBIAI & Orestas STRAUKA
 
 ## The Paper
-The final version of the paper can be found [here](www.temp.com).
+The final version of the paper can be found [here](https://drive.google.com/file/d/103oBfhuuYznJkMh_EhH7EwcQ9Gnaj8au/view?usp=sharing).
 
 ## Requirements
 In order to run the code yourself, make sure you follow these steps:
