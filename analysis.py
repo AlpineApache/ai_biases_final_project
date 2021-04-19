@@ -133,7 +133,8 @@ def aggregate_racial_bias_results(data):
 	racial_bias_results.to_csv("racial_bias_results.csv")
 
 	#####
-	# Add data to list of plot frames
+	# Add data to list of plot frames; standardize "Difference" variable
+	racial_bias_results["Difference"] = racial_bias_results["Difference"].abs()
 	dataplot = pd.DataFrame(racial_bias_results)
 	dataplot["Type"] = "Race"
 	dataplot = dataplot.loc[(dataplot["Hypothesis"] != 0)]
@@ -225,7 +226,8 @@ def aggregate_gender_bias_results(data):
 	gender_bias_results.to_csv("gender_bias_results.csv")
 
 	#####
-	# Add data to list of plot frames
+	# Add data to list of plot frames; standardize "Difference" variable
+	gender_bias_results["Difference"] = gender_bias_results["Difference"].abs()
 	dataplot = pd.DataFrame(gender_bias_results)
 	dataplot["Type"] = "Gender"
 	dataplot = dataplot.loc[(dataplot["Hypothesis"] != 0)]
