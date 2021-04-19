@@ -1,10 +1,13 @@
 import pandas as pd
 from scipy.stats import ttest_ind
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 libraries = ["vader_sentiment", "text_blob"]
 emotions = ["anger", "joy", "fear", "sadness"]
 genders = ["female", "male"]
 races = ["European", "African-American"]
+frames = []
 
 # documentation https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind
 def run_t_test(category_1, category_2):
@@ -129,6 +132,13 @@ def aggregate_racial_bias_results(data):
 	# Export race bias results to .csv file
 	racial_bias_results.to_csv("racial_bias_results.csv")
 
+	#####
+	# Add data to list of plot frames
+	dataplot = pd.DataFrame(racial_bias_results)
+	dataplot["Type"] = "Race"
+	dataplot = dataplot.loc[(dataplot["Hypothesis"] != 0)]
+	frames.append(dataplot)
+
 
 def aggregate_gender_bias_results(data):
 	gender_result_list = []
@@ -140,7 +150,7 @@ def aggregate_gender_bias_results(data):
 		for emotion in emotions:
 			for gender in genders:
 				gender_df = data.loc[
-					(data["Library"] == library) & (data["Race"] == gender) & (data["Emotion"] == emotion)]
+					(data["Library"] == library) & (data["Gender"] == gender) & (data["Emotion"] == emotion)]
 				temp_data = {
 					"Library": library,
 					"Gender": gender,
@@ -214,7 +224,25 @@ def aggregate_gender_bias_results(data):
 	# Export race bias results to .csv file
 	gender_bias_results.to_csv("gender_bias_results.csv")
 
+	#####
+	# Add data to list of plot frames
+	dataplot = pd.DataFrame(gender_bias_results)
+	dataplot["Type"] = "Gender"
+	dataplot = dataplot.loc[(dataplot["Hypothesis"] != 0)]
+	frames.append(dataplot)
+
+def plot_mean_differences():
+	#####
+	# Plot the data that have been added to the frames list
+	dataplot = pd.concat(frames)
+	df = pd.DataFrame(dataplot)
+	sns.catplot(x="Library", y="Difference", data=df, jitter=0.12, hue="Type")
+
+	#####
+	# Export the plot to .png file
+	plt.savefig("./mean_differences.png")
 
 def t_test_bias_analysis(data):
 	aggregate_racial_bias_results(data)
 	aggregate_gender_bias_results(data)
+	plot_mean_differences()

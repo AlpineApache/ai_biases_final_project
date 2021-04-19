@@ -102,6 +102,7 @@ requests==2.25.1
 sacremoses==0.0.44
 scikit-learn==0.24.1
 scipy==1.5.4
+seaborn==0.11.1
 segtok==1.5.10
 Send2Trash==1.5.0
 sentencepiece==0.1.95
