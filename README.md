@@ -2,7 +2,7 @@
 by Nicolaus CHRISTENSON, Matteo NEBBIAI & Orestas STRAUKA
 
 ## The Paper
-The final version of the paper can be found [here](https://drive.google.com/file/d/103oBfhuuYznJkMh_EhH7EwcQ9Gnaj8au/view?usp=sharing).
+The final version of the paper can be found [here](https://drive.google.com/file/d/1yQGquzA9vVzd0UpjHrCDgVwclhf9K1oi/view?usp=sharing).
 
 ## Requirements
 In order to run the code yourself, make sure you follow these steps:
